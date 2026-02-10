@@ -31,6 +31,7 @@
     "@qwik-ui/styled": "^0.4.1",
     "@qwik-ui/utils": "^0.3.3",
     "@qwikest/icons": "^0.0.13",
+    "@storyblok/js": "^4.4.5",
     "@tailwindcss/vite": "^4.1.4",
     "@types/node": "20.19.0",
     "class-variance-authority": "0.7.1",
