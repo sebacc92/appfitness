@@ -1,8 +1,19 @@
 import { component$ } from "@builder.io/qwik";
 import { Accordion } from "./ui";
 
-export const FAQSection = component$(() => {
-  const faqs = [
+export interface FAQ {
+  q: string;
+  a: string;
+}
+
+export interface FAQProps {
+  heading?: string;
+  subheading?: string;
+  faqs?: FAQ[];
+}
+
+export const FAQSection = component$((props: FAQProps) => {
+  const defaultFaqs = [
     {
       q: "¿Necesito experiencia previa?",
       a: "No, nuestros programas están diseñados para todos los niveles, desde principiantes hasta avanzados.",
@@ -28,12 +39,15 @@ export const FAQSection = component$(() => {
       a: "Nuestros programas se enfocan en el entrenamiento, pero incluimos guías generales de nutrición para maximizar tus resultados.",
     },
   ];
+
+  const faqs = props.faqs || defaultFaqs;
+
   return (
     <section class="py-16 md:py-24 bg-[#F5F7FA]">
       <div class="container max-w-4xl mx-auto px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-5xl font-bold mb-4">Preguntas Frecuentes</h2>
-          <p class="text-xl text-gray-500">Todo lo que necesitas saber para empezar</p>
+          <h2 class="text-4xl md:text-5xl font-bold mb-4">{props.heading || "Preguntas Frecuentes"}</h2>
+          <p class="text-xl text-gray-500">{props.subheading || "Todo lo que necesitas saber para empezar"}</p>
         </div>
         <Accordion.Root behavior="single" collapsible class="w-full">
           {faqs.map((faq, i) => (
