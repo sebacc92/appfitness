@@ -148,8 +148,8 @@ export default component$<Props>((props) => {
                                 <div
                                     key={i}
                                     class={`w-3 h-3 rounded-full transition-all ${i < trialDay.value
-                                            ? 'bg-amber-500 scale-110'
-                                            : 'bg-amber-200'
+                                        ? 'bg-amber-500 scale-110'
+                                        : 'bg-amber-200'
                                         }`}
                                 />
                             ))}

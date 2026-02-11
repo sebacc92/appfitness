@@ -1,10 +1,11 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { storyblokEditable, type SbBlokData } from "@storyblok/js";
 import StoryblokComponent from "../component";
-import { LuChevronDown, LuDumbbell } from "@qwikest/icons/lucide";
+import { LuChevronDown, LuChevronUp, LuDumbbell } from "@qwikest/icons/lucide";
 
 export interface WorkoutBlok extends SbBlokData {
     day_title: string;
+    description?: string;
     exercises?: SbBlokData[];
 }
 
@@ -14,47 +15,45 @@ interface Props {
 
 export default component$<Props>((props) => {
     const isOpen = useSignal(false);
-    const exerciseCount = props.blok.exercises?.length ?? 0;
 
     return (
-        <div {...storyblokEditable(props.blok)} class="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden transition-all hover:shadow-md">
-            {/* Accordion Header */}
+        <div {...storyblokEditable(props.blok)} class="mb-4 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+            {/* Header del Acordeón */}
             <button
-                onClick$={() => (isOpen.value = !isOpen.value)}
-                class="w-full flex items-center justify-between px-5 py-4 cursor-pointer group transition-colors hover:bg-gray-50"
+                onClick$={() => isOpen.value = !isOpen.value}
+                class="w-full flex items-center justify-between p-5 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
             >
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-cyan-600 flex items-center justify-center shrink-0">
-                        <LuDumbbell class="w-5 h-5 text-white" />
+                    <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
+                        <LuDumbbell />
                     </div>
-                    <div class="text-left">
-                        <h3 class="font-bold text-gray-900 text-lg group-hover:text-cyan-700 transition-colors">
-                            {props.blok.day_title}
-                        </h3>
-                        <p class="text-sm text-gray-500">
-                            {exerciseCount} {exerciseCount === 1 ? 'ejercicio' : 'ejercicios'}
-                        </p>
+                    <div>
+                        {/* Título del Día */}
+                        <h3 class="font-bold text-gray-900 text-lg">{props.blok.day_title || "Entrenamiento del día"}</h3>
+                        {/* Descripción corta (preview) si está cerrado */}
+                        {!isOpen.value && props.blok.description && (
+                            <p class="text-xs text-gray-500 mt-1 line-clamp-1">{props.blok.description}</p>
+                        )}
                     </div>
                 </div>
-                <LuChevronDown
-                    class={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isOpen.value ? 'rotate-180' : ''
-                        }`}
-                />
+                {isOpen.value ? <LuChevronUp class="text-gray-400" /> : <LuChevronDown class="text-gray-400" />}
             </button>
 
-            {/* Accordion Content */}
+            {/* Contenido Desplegable */}
             {isOpen.value && (
-                <div class="border-t border-gray-100 bg-gray-50/50 px-5 py-4">
-                    <div class="space-y-3">
-                        {props.blok.exercises?.map((nestedBlok) => (
-                            <StoryblokComponent key={nestedBlok._uid} blok={nestedBlok} />
-                        ))}
+                <div class="p-5 border-t border-gray-100 animate-fadeIn">
+                    {/* Descripción Completa */}
+                    {props.blok.description && (
+                        <div class="mb-6 text-gray-600 text-sm bg-blue-50 p-4 rounded-lg border border-blue-100">
+                            {props.blok.description}
+                        </div>
+                    )}
 
-                        {exerciseCount === 0 && (
-                            <p class="text-gray-400 italic text-sm text-center py-4">
-                                No hay ejercicios asignados para este día.
-                            </p>
-                        )}
+                    {/* Lista de Ejercicios */}
+                    <div class="space-y-6">
+                        {props.blok.exercises?.map((exercise) => (
+                            <StoryblokComponent key={exercise._uid} blok={exercise} />
+                        ))}
                     </div>
                 </div>
             )}
