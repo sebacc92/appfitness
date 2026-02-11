@@ -13,7 +13,7 @@ export default component$<HeaderProps>(() => {
     const loc = useLocation();
     const isHome = loc.url.pathname === `/` || loc.url.pathname === `/index`;
     const menuItems = [
-        { label: "Programas", href: '#programa', anchor: true },
+        { label: "Programas", href: '#programas', anchor: true },
         { label: "Testimonios", href: '#testimonios', anchor: true },
         { label: "Acerca de", href: '#acerca', anchor: true },
         { label: "Contacto", href: `/contacto` },

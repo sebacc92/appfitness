@@ -10,6 +10,9 @@ import FAQ from "./faq-section";
 import Program from "./training/program";
 import Workout from "./training/workout";
 import Exercise from "./training/exercise";
+import TestimonialItem from "./testimonial-item";
+
+import ProgramsSection from "./programs-section";
 
 interface Props {
     blok: SbBlokData;
@@ -25,6 +28,8 @@ const Components: any = {
     'program': Program,
     'workout': Workout,
     'exercise': Exercise,
+    'testimonial_item': TestimonialItem,
+    'programs_section': ProgramsSection,
 };
 
 export default component$<Props>((props) => {
