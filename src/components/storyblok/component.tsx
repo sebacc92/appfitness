@@ -7,6 +7,9 @@ import Methodology from "./methodology";
 import Testimonials from "./testimonials-section";
 import About from "./about-section";
 import FAQ from "./faq-section";
+import Program from "./training/program";
+import Workout from "./training/workout";
+import Exercise from "./training/exercise";
 
 interface Props {
     blok: SbBlokData;
@@ -16,9 +19,12 @@ const Components: any = {
     'page': Page,
     'hero': Hero,
     'methodology': Methodology,
-    'testimonials': Testimonials,
-    'about': About,
+    'testimonials_section': Testimonials,
+    'about_section': About,
     'faq': FAQ,
+    'program': Program,
+    'workout': Workout,
+    'exercise': Exercise,
 };
 
 export default component$<Props>((props) => {

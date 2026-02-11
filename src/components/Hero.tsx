@@ -43,21 +43,27 @@ export const Hero = component$((props: HeroProps) => {
       {/* Content */}
       <div class="relative z-10 max-w-7xl mx-auto w-full">
         <div class="text-left text-white">
-          <h1 class="text-3xl md:text-6xl lg:text-7xl font-bold font-['Orbitron'] mb-4 md:mb-6 leading-tight max-w-5xl">
-            {heading || "Descubrí Tu Mejor Versión"}
-          </h1>
-          <p class="text-base md:text-xl lg:text-2xl mb-6 md:mb-8 leading-relaxed max-w-4xl">
-            {subheading || "Entrenamiento personal y online adaptado a tus objetivos: pérdida de peso, ganancia muscular y salud general."}
-          </p>
+          {heading && (
+            <h1 class="text-3xl md:text-6xl lg:text-7xl font-bold font-['Orbitron'] mb-4 md:mb-6 leading-tight max-w-5xl">
+              {heading}
+            </h1>
+          )}
+          {subheading && (
+            <p class="text-base md:text-xl lg:text-2xl mb-6 md:mb-8 leading-relaxed max-w-4xl">
+              {subheading}
+            </p>
+          )}
 
-          <Link
-            href={heroLink}
-            class="inline-block"
-          >
-            <Button class="bg-white hover:bg-gray-100 text-[#1d4ed8] hover:text-[#2563eb] px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-lg transition-safe transform hover:scale-105">
-              {buttonText || "¡QUIERO MIS 7 DÍAS GRATIS!"}
-            </Button>
-          </Link>
+          {buttonText && (
+            <Link
+              href={heroLink}
+              class="inline-block"
+            >
+              <Button class="bg-white hover:bg-gray-100 text-[#1d4ed8] hover:text-[#2563eb] px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-lg transition-safe transform hover:scale-105">
+                {buttonText}
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
 
