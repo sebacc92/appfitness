@@ -44,7 +44,7 @@ export default component$<Props>((props) => {
                                         <img
                                             src={content.cover_image.filename}
                                             alt={content.cover_image.alt || content.title}
-                                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                                            class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
                                             width={400}
                                             height={256}
                                         />
@@ -95,7 +95,7 @@ export default component$<Props>((props) => {
 
                                         {/* Link Button */}
                                         <Link
-                                            href={`/app/program/${program.slug}`}
+                                            href={`/program/${program.slug}`}
                                             class="inline-flex items-center justify-center bg-[#1e3a8a] hover:bg-[#1e40af] text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md"
                                         >
                                             Ver Programa
