@@ -54,7 +54,7 @@ export default component$<HeaderProps>(() => {
                 {/* Logo */}
                 <Link href="/">
                     <div class="flex items-center">
-                        <LuDumbbell class="h-10 w-10 text-[#6A0DAD] mr-3" />
+                        <LuDumbbell class="h-10 w-10 text-[#00C2FF] mr-3" />
                         <span class={`font-bold text-base md:text-lg lg:text-xl hidden lg:inline transition-colors duration-300 ${scrolled.value ? 'text-gray-900' : 'text-white'
                             }`}>Coach Fabian Avendaño</span>
                         <span class={`font-bold text-lg lg:hidden transition-colors duration-300 ${scrolled.value ? 'text-gray-900' : 'text-white'
@@ -119,7 +119,7 @@ export default component$<HeaderProps>(() => {
                         aria-label="Open menu"
                         onClick$={() => (menuOpen.value = true)}
                     >
-                        <LuMenu class={`h-7 w-7 transition-colors duration-300 ${scrolled.value ? 'text-[#6A0DAD]' : 'text-white'
+                        <LuMenu class={`h-7 w-7 transition-colors duration-300 ${scrolled.value ? 'text-[#00C2FF]' : 'text-white'
                             }`} />
                     </button>
                 </div>
@@ -131,7 +131,7 @@ export default component$<HeaderProps>(() => {
                     aria-label="Open menu"
                     onClick$={() => (menuOpen.value = true)}
                 >
-                    <LuMenu class={`h-7 w-7 transition-colors duration-300 ${scrolled.value ? 'text-[#6A0DAD]' : 'text-white'
+                    <LuMenu class={`h-7 w-7 transition-colors duration-300 ${scrolled.value ? 'text-[#00C2FF]' : 'text-white'
                         }`} />
                 </button>
             </div>
@@ -147,15 +147,15 @@ export default component$<HeaderProps>(() => {
                         {/* Header with logo and close */}
                         <div class="flex justify-between items-center mb-12">
                             <div class="flex items-center">
-                                <LuDumbbell class="h-8 w-8 text-[#6A0DAD] mr-3" />
+                                <LuDumbbell class="h-8 w-8 text-[#00C2FF] mr-3" />
                                 <span class="font-bold text-base md:text-lg lg:text-xl text-white">F. Avendaño</span>
                             </div>
                             <button
-                                class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#6A0DAD] transition-colors"
+                                class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-[#00C2FF] transition-colors"
                                 aria-label="Close menu"
                                 onClick$={() => (menuOpen.value = false)}
                             >
-                                <LuX class="h-8 w-8 text-white hover:text-[#6A0DAD]" />
+                                <LuX class="h-8 w-8 text-white hover:text-[#00C2FF]" />
                             </button>
                         </div>
 
