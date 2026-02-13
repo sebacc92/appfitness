@@ -3,6 +3,7 @@ import { routeLoader$, Link } from "@builder.io/qwik-city";
 import { storyblokApi } from "~/routes/plugin@storyblok";
 import type { ISbStoryData } from "@storyblok/js";
 import { renderRichText } from "@storyblok/js";
+import { StoryblokImage } from "~/components/ui/storyblok-image";
 import { LuLock, LuDumbbell, LuClock, LuCalendar } from "@qwikest/icons/lucide";
 
 export const usePublicProgramStory = routeLoader$(async ({ params, error }) => {
@@ -32,13 +33,16 @@ export default component$(() => {
     return (
         <div class="min-h-screen bg-gray-50 flex flex-col">
             {/* Hero Section */}
-            <div class="relative min-h-[60vh] md:min-h-[85vh] h-auto w-full overflow-hidden bg-gray-900">
+            <div class="relative min-h-[60vh] md:min-h-[85vh] h-auto w-full overflow-hidden bg-gray-900 group">
                 {content.cover_image?.filename ? (
                     <>
-                        <img
+                        <StoryblokImage
                             src={content.cover_image.filename}
                             alt={content.cover_image.alt || content.title}
-                            class="absolute inset-0 h-full w-full object-cover opacity-60"
+                            width={1920}
+                            height={1080}
+                            class="absolute inset-0 h-full w-full object-cover object-top opacity-60 transition-transform duration-700 group-hover:scale-105"
+                            priority={true}
                         />
                         <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
                     </>
@@ -53,7 +57,7 @@ export default component$(() => {
                             <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-cyan-500/20 px-4 py-1.5 text-sm font-bold text-cyan-300 backdrop-blur-sm border border-cyan-500/30">
                                 <span>PROGRAMA EXCLUSIVO</span>
                             </div>
-                            <h1 class="font-['Orbitron'] text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl mb-6 lg:mb-0 drop-shadow-2xl tracking-wide">
+                            <h1 class="font-['Orbitron'] text-4xl font-black leading-tight text-white md:text-7xl lg:text-8xl mb-6 lg:mb-0 drop-shadow-2xl tracking-wide">
                                 {content.title}
                             </h1>
                         </div>
