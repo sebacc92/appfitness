@@ -90,7 +90,7 @@ export default component$(() => {
           </div>
         </div>
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p class="text-gray-400 text-sm">© 2025 Fabián Avendaño. Todos los derechos reservados.</p>
+          <p class="text-gray-400 text-sm">© 2026 Fabián Avendaño. Todos los derechos reservados.</p>
         </div>
         <div class="mt-4 text-center">
           <a

@@ -10,6 +10,7 @@ import FAQ from "./faq-section";
 import Program from "./training/program";
 import Workout from "./training/workout";
 import Exercise from "./training/exercise";
+import ExerciseAlternatives from "./training/exercise-alternatives";
 import TestimonialItem from "./testimonial-item";
 
 import ProgramsSection from "./programs-section";
@@ -28,6 +29,7 @@ const Components: any = {
     'program': Program,
     'workout': Workout,
     'exercise': Exercise,
+    'exercise_alternatives': ExerciseAlternatives,
     'testimonial_item': TestimonialItem,
     'programs_section': ProgramsSection,
 };

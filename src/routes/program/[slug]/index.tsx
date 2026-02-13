@@ -30,9 +30,9 @@ export default component$(() => {
     const trialDays = content.trial_days || 7;
 
     return (
-        <div class="min-h-screen bg-gray-50 flex flex-col">
+        <div class="min-h-screen bg-gray-50 flex flex-col md:pt-[80px]">
             {/* Hero Section */}
-            <div class="relative h-[60vh] md:h-[70vh] w-full overflow-hidden bg-gray-900">
+            <div class="relative min-h-[60vh] md:min-h-[70vh] h-auto w-full overflow-hidden bg-gray-900">
                 {content.cover_image?.filename ? (
                     <>
                         <img
@@ -46,23 +46,28 @@ export default component$(() => {
                     <div class="absolute inset-0 bg-gradient-to-br from-cyan-900 to-blue-900 opacity-90" />
                 )}
 
-                <div class="absolute inset-0 flex items-end pb-16 md:pb-24">
-                    <div class="container mx-auto px-4">
-                        <div class="max-w-4xl">
-                            <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-bold text-cyan-300 backdrop-blur-sm border border-cyan-500/30">
-                                <span>PROGRAMA EXCLUSIVO</span>
-                            </div>
-                            <h1 class="font-['Poppins'] text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl mb-6 drop-shadow-xl">
-                                {content.title}
-                            </h1>
-                            {content.description && (
-                                <div class="prose prose-lg prose-invert max-w-2xl text-gray-200 drop-shadow-md hidden md:block">
-                                    <div dangerouslySetInnerHTML={typeof content.description === 'string'
-                                        ? content.description
-                                        : renderRichText(content.description)} />
-                                </div>
-                            )}
+                <div class="relative h-full container mx-auto px-4 flex flex-col justify-center items-center pb-16 md:pb-24 pt-32 md:pt-40 text-center">
+                    <div class="max-w-4xl mx-auto flex flex-col items-center">
+                        <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-cyan-500/20 px-4 py-1.5 text-sm font-bold text-cyan-300 backdrop-blur-sm border border-cyan-500/30">
+                            <span>PROGRAMA EXCLUSIVO</span>
                         </div>
+                        <h1 class="font-['Orbitron'] text-5xl font-black leading-tight text-white md:text-7xl lg:text-8xl mb-8 drop-shadow-2xl tracking-wide">
+                            {content.title}
+                        </h1>
+                        {content.description && (
+                            <div class="prose prose-lg prose-invert max-w-3xl text-gray-200 drop-shadow-md mb-12 text-center mx-auto [&>*]:text-center">
+                                <div dangerouslySetInnerHTML={typeof content.description === 'string'
+                                    ? content.description
+                                    : renderRichText(content.description)} />
+                            </div>
+                        )}
+
+                        <Link
+                            href={`/login?action=register&redirect=/app/program/${story.slug}`}
+                            class="inline-block bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)]"
+                        >
+                            EMPEZAR AHORA
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@ export const Hero = component$((props: HeroProps) => {
   const { heading, subheading, backgroundImage, buttonText } = props;
 
   return (
-    <section class="relative min-h-screen flex items-center justify-start px-6 pt-20">
+    <section class="relative min-h-screen flex items-center justify-center px-6 pt-20">
       {/* Background image and overlay */}
       <div class="absolute inset-0 overflow-hidden">
         <div class="absolute inset-0 animate-hero-zoom">
@@ -41,15 +41,15 @@ export const Hero = component$((props: HeroProps) => {
         </div>
       </div>
       {/* Content */}
-      <div class="relative z-10 max-w-7xl mx-auto w-full">
-        <div class="text-left text-white">
+      <div class="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center">
+        <div class="text-center text-white flex flex-col items-center">
           {heading && (
-            <h1 class="text-3xl md:text-6xl lg:text-7xl font-bold font-['Orbitron'] mb-4 md:mb-6 leading-tight max-w-5xl">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-['Orbitron'] mb-6 md:mb-8 leading-tight max-w-5xl drop-shadow-2xl">
               {heading}
             </h1>
           )}
           {subheading && (
-            <p class="text-base md:text-xl lg:text-2xl mb-6 md:mb-8 leading-relaxed max-w-4xl">
+            <p class="text-lg md:text-2xl lg:text-3xl mb-10 md:mb-12 leading-relaxed max-w-4xl text-gray-100 drop-shadow-md">
               {subheading}
             </p>
           )}
@@ -59,14 +59,13 @@ export const Hero = component$((props: HeroProps) => {
               href={heroLink}
               class="inline-block"
             >
-              <Button class="bg-white hover:bg-gray-100 text-[#1d4ed8] hover:text-[#2563eb] px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-lg transition-safe transform hover:scale-105">
+              <Button class="bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)] border-none">
                 {buttonText}
               </Button>
             </Link>
           )}
         </div>
       </div>
-
     </section>
   );
 }); 

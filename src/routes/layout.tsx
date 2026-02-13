@@ -15,7 +15,6 @@ export const usePrograms = routeLoader$(async () => {
             version: 'published',
             starts_with: 'programs/',
             is_startpage: false,
-            sort_by: 'created_at:asc',
         });
         return data.stories || [];
     } catch (e) {
