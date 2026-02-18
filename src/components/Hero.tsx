@@ -16,29 +16,20 @@ export interface HeroProps {
 
 export const Hero = component$((props: HeroProps) => {
   const heroLink = "/program/fuerza";
-  const { heading, subheading, backgroundImage, buttonText, secondaryButtonText, secondaryButtonLink } = props;
+  const { heading, subheading, buttonText, secondaryButtonText, secondaryButtonLink } = props;
 
   return (
     <section class="relative min-h-screen flex items-center justify-center px-6 pt-20">
       {/* Background image and overlay */}
       <div class="absolute inset-0 overflow-hidden">
         <div class="absolute inset-0 animate-hero-zoom">
-          {backgroundImage ? (
-            <img
-              src={backgroundImage}
-              alt={heading || "Hero background"}
-              class="object-cover object-top w-full h-full absolute inset-0"
-              style="z-index:0;"
-            />
-          ) : (
-            <HeroBgImg
-              loading="eager"
-              decoding="sync"
-              alt="Fabián Avendaño entrenando intensamente con kettlebells en el gimnasio"
-              class="object-cover object-top w-full h-full absolute inset-0"
-              style="z-index:0;"
-            />
-          )}
+          <HeroBgImg
+            loading="eager"
+            decoding="sync"
+            alt="Fabián Avendaño entrenando intensamente con kettlebells en el gimnasio"
+            class="object-cover object-top w-full h-full absolute inset-0"
+            style="z-index:0;"
+          />
           <div class="absolute inset-0 bg-black/40"></div>
         </div>
       </div>
@@ -62,7 +53,7 @@ export const Hero = component$((props: HeroProps) => {
                 href={heroLink}
                 class="inline-block"
               >
-                <Button class="bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)] border-none">
+                <Button class="bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 h-auto rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)] border-none">
                   {buttonText}
                 </Button>
               </Link>
