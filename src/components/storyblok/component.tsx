@@ -26,7 +26,7 @@ const Components: any = {
     'testimonials_section': Testimonials,
     'about_section': About,
     'faq': FAQ,
-    'program': Program,
+    'Program': Program,
     'workout': Workout,
     'exercise': Exercise,
     'exercise_alternatives': ExerciseAlternatives,
