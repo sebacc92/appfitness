@@ -83,15 +83,6 @@ export default component$<Props>((props) => {
                             <h1 class="text-3xl md:text-4xl font-bold text-white mb-2 drop-shadow-lg">
                                 {props.blok.title}
                             </h1>
-
-                            <div class="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-gray-100">
-                                <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Sobre el programa</h2>
-                                {props.blok.description && (
-                                    <div class="rich-text-content">
-                                        <RichTextRenderer content={props.blok.description} />
-                                    </div>
-                                )}
-                            </div>
                         </div>
                     </div>
                 )}
@@ -101,9 +92,13 @@ export default component$<Props>((props) => {
                         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                             {props.blok.title}
                         </h1>
-                        {props.blok.description && (
-                            <p class="text-lg text-gray-600">{props.blok.description}</p>
-                        )}
+                        <div class="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-gray-100">
+                            {props.blok.description && (
+                                <div class="rich-text-content">
+                                    <RichTextRenderer content={props.blok.description} />
+                                </div>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>

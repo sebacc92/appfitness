@@ -174,7 +174,7 @@ export default component$(() => {
                             </div>
 
                             <Link
-                                href={`/login?action=register&redirect=/app/program/${story.slug}`}
+                                href={`/create?action=register&redirect=/app/program/${story.slug}`}
                                 class="block w-full bg-[#1e3a8a] hover:bg-[#1e40af] text-white text-center font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                             >
                                 INICIAR PRUEBA DE {trialDays} DÍAS
