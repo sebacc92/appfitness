@@ -2,10 +2,13 @@ import { component$, useSignal } from '@builder.io/qwik';
 import { storyblokEditable, type SbBlokData } from "@storyblok/js";
 import StoryblokComponent from "../component";
 import { LuChevronDown, LuChevronUp, LuDumbbell } from "@qwikest/icons/lucide";
+import { getYouTubeEmbedUrl } from "~/utils/video";
 
 export interface WorkoutBlok extends SbBlokData {
     day_title: string;
     description?: string;
+    video?: { filename: string } | string;
+    video_url?: string;
     exercises?: SbBlokData[];
 }
 
@@ -16,23 +19,44 @@ interface Props {
 export default component$<Props>((props) => {
     const isOpen = useSignal(false);
 
+    // Determine video source
+    const videoField = props.blok.video;
+    let videoUrl = '';
+
+    if (typeof videoField === 'string') {
+        videoUrl = videoField;
+    } else if (videoField) {
+        // Storyblok asset (image/video) usually has 'filename'
+        // Storyblok multilink (url) usually has 'url' or 'cached_url'
+        // Type assertion as 'any' to handle the flexible structure of Storyblok fields
+        const v = videoField as any;
+        videoUrl = v.url || v.cached_url || v.filename || '';
+    }
+
+    // Fallback to legacy video_url field if needed
+    if (!videoUrl) {
+        videoUrl = props.blok.video_url || '';
+    }
+
+    const embedUrl = getYouTubeEmbedUrl(videoUrl);
+
     return (
-        <div {...storyblokEditable(props.blok)} class="mb-4 border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+        <div {...storyblokEditable(props.blok)} class="mb-4 border border-gray-800 rounded-xl overflow-hidden bg-gray-900 shadow-md">
             {/* Header del Acordeón */}
             <button
                 onClick$={() => isOpen.value = !isOpen.value}
-                class="w-full flex items-center justify-between p-5 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
+                class="w-full flex items-center justify-between p-5 bg-gray-800 hover:bg-gray-750 transition-colors text-left"
             >
-                <div class="flex items-center gap-3">
-                    <div class="bg-blue-100 p-2 rounded-lg text-blue-600">
-                        <LuDumbbell />
+                <div class="flex items-center gap-4">
+                    <div class="bg-blue-900/50 p-3 rounded-lg text-blue-400">
+                        <LuDumbbell class="w-6 h-6" />
                     </div>
                     <div>
                         {/* Título del Día */}
-                        <h3 class="font-bold text-gray-900 text-lg">{props.blok.day_title || "Entrenamiento del día"}</h3>
+                        <h3 class="font-bold text-white text-lg">{props.blok.day_title || "Entrenamiento del día"}</h3>
                         {/* Descripción corta (preview) si está cerrado */}
                         {!isOpen.value && props.blok.description && (
-                            <p class="text-xs text-gray-500 mt-1 line-clamp-1">{props.blok.description}</p>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-1">{props.blok.description}</p>
                         )}
                     </div>
                 </div>
@@ -41,19 +65,36 @@ export default component$<Props>((props) => {
 
             {/* Contenido Desplegable */}
             {isOpen.value && (
-                <div class="p-5 border-t border-gray-100 animate-fadeIn">
+                <div class="p-5 border-t border-gray-700 animate-fadeIn">
+
+                    {/* Video del Workout */}
+                    {embedUrl && (
+                        <div class="mb-6 rounded-lg overflow-hidden shadow-lg border border-gray-700">
+                            <iframe
+                                src={embedUrl}
+                                title={props.blok.day_title}
+                                class="w-full aspect-video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullscreen
+                            />
+                        </div>
+                    )}
+
                     {/* Descripción Completa */}
                     {props.blok.description && (
-                        <div class="mb-6 text-gray-600 text-sm bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <div class="mb-8 text-gray-300 text-sm bg-gray-800/50 p-4 rounded-lg border border-gray-700 leading-relaxed">
                             {props.blok.description}
                         </div>
                     )}
 
                     {/* Lista de Ejercicios */}
-                    <div class="space-y-6">
+                    <div class="space-y-4">
                         {props.blok.exercises?.map((exercise) => (
                             <StoryblokComponent key={exercise._uid} blok={exercise} />
                         ))}
+                        {(!props.blok.exercises || props.blok.exercises.length === 0) && (
+                            <p class="text-center text-gray-500 italic py-4">No hay ejercicios asignados.</p>
+                        )}
                     </div>
                 </div>
             )}
