@@ -15,7 +15,7 @@ export interface HeroProps {
 }
 
 export const Hero = component$((props: HeroProps) => {
-  const heroLink = props.buttonLink || "/program/reto-1-transformacion";
+  const heroLink = "/program/fuerza";
   const { heading, subheading, backgroundImage, buttonText, secondaryButtonText, secondaryButtonLink } = props;
 
   return (

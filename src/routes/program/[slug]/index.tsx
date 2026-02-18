@@ -39,8 +39,8 @@ export default component$(() => {
                         <StoryblokImage
                             src={content.cover_image.filename}
                             alt={content.cover_image.alt || content.title}
-                            width={1920}
-                            height={1080}
+                            // width={1920}
+                            // height={1080}
                             layout="fullWidth"
                             class="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
                             style={{ objectPosition: 'top center', height: '100%' }}
