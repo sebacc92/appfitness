@@ -2,9 +2,9 @@ import { component$ } from "@builder.io/qwik";
 import { routeLoader$, Link } from "@builder.io/qwik-city";
 import { storyblokApi } from "~/routes/plugin@storyblok";
 import type { ISbStoryData } from "@storyblok/js";
-import { renderRichText } from "@storyblok/js";
 import { StoryblokImage } from "~/components/ui/storyblok-image";
 import { LuLock, LuDumbbell, LuClock, LuCalendar } from "@qwikest/icons/lucide";
+import { RichTextRenderer } from "~/components/storyblok/rich-text-renderer";
 
 export const usePublicProgramStory = routeLoader$(async ({ params, error }) => {
     const slug = params.slug;
@@ -33,7 +33,7 @@ export default component$(() => {
     return (
         <div class="min-h-screen bg-gray-50 flex flex-col">
             {/* Hero Section */}
-            <div class="relative min-h-[60vh] md:min-h-[85vh] h-auto w-full overflow-hidden bg-gray-900 group">
+            <div class="relative min-h-[60vh] md:min-h-[85vh] w-full bg-gray-900 group">
                 {content.cover_image?.filename ? (
                     <>
                         <StoryblokImage
@@ -42,41 +42,38 @@ export default component$(() => {
                             width={1920}
                             height={1080}
                             layout="fullWidth"
-                            class="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
-                            style={{ objectPosition: 'center 20%' }}
+                            class="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
+                            style={{ objectPosition: 'top center', height: '100%' }}
                             priority={true}
                         />
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
+                        {/* Gradient Overlay for text readability */}
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/90 to-black/50 z-10 pointer-events-none" />
                     </>
                 ) : (
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-900 to-blue-900 opacity-90" />
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-900 to-blue-900 z-0" />
                 )}
 
-                <div class="relative h-full container mx-auto px-4 flex flex-col justify-center pb-20 md:pb-32 pt-32 md:pt-48">
+                <div class="relative z-20 h-full container mx-auto px-4 flex flex-col justify-center pb-20 md:pb-32 pt-32 md:pt-48 min-h-[60vh] md:min-h-[85vh]">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                         {/* Left Column: Badge & Title */}
                         <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
                             <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-cyan-500/20 px-4 py-1.5 text-sm font-bold text-cyan-300 backdrop-blur-sm border border-cyan-500/30">
                                 <span>PROGRAMA EXCLUSIVO</span>
                             </div>
-                            <h1 class="font-['Orbitron'] text-4xl font-black leading-tight text-white md:text-7xl lg:text-8xl mb-6 lg:mb-0 drop-shadow-2xl tracking-wide">
+                            <h1 class="font-['Orbitron'] text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 drop-shadow-2xl">
                                 {content.title}
                             </h1>
+                            {/* Subtitle / Short Description from hero if available, or just a tagline */}
+                            <p class="text-lg md:text-xl text-gray-200 font-medium max-w-lg">
+                                {content.subtitle || "Entrena como un profesional, donde sea."}
+                            </p>
                         </div>
 
-                        {/* Right Column: Description & Button */}
+                        {/* Right Column: CTA */}
                         <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
-                            {content.description && (
-                                <div class="prose prose-xl prose-invert text-gray-200 drop-shadow-md mb-10 [&>*]:text-center lg:[&>*]:text-left leading-relaxed">
-                                    <div dangerouslySetInnerHTML={typeof content.description === 'string'
-                                        ? content.description
-                                        : renderRichText(content.description)} />
-                                </div>
-                            )}
-
                             <Link
                                 href={`/login?action=register&redirect=/app/program/${story.slug}`}
-                                class="inline-block bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)]"
+                                class="inline-block bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)]"
                             >
                                 EMPEZAR AHORA
                             </Link>
@@ -85,24 +82,23 @@ export default component$(() => {
                 </div>
             </div>
 
-            <div class="container mx-auto px-4 -mt-10 relative z-10 mb-20">
+            {/* Main Content Container */}
+            <div class="container mx-auto px-4 py-12 md:py-16 relative z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Main Content */}
-                    <div class="lg:col-span-2 space-y-8">
-                        {/* Mobile Description (visible only on small screens) */}
-                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 md:hidden">
-                            <h2 class="text-xl font-bold text-gray-900 mb-4">Sobre el programa</h2>
+                    {/* Main Content Column */}
+                    <div class="lg:col-span-2 space-y-12">
+                        {/* Description Section */}
+                        <div class="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-gray-100">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Sobre el programa</h2>
                             {content.description && (
-                                <div class="prose prose-sm text-gray-600">
-                                    <div dangerouslySetInnerHTML={typeof content.description === 'string'
-                                        ? content.description
-                                        : renderRichText(content.description)} />
+                                <div class="rich-text-content">
+                                    <RichTextRenderer content={content.description} />
                                 </div>
                             )}
                         </div>
 
                         {/* Workouts Showcase */}
-                        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
+                        <div id="workouts" class="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
                             <div class="flex items-center justify-between mb-8">
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-900 mb-1">Entrenamientos</h2>
