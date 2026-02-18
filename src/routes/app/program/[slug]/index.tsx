@@ -114,7 +114,7 @@ export const useUserProgram = routeLoader$(async (requestEvent) => {
     }
 
     return {
-        user: { email: user.email },
+        user: { email: String(user.email) },
         enrollment: {
             status,
             daysRemaining
@@ -126,6 +126,7 @@ export default component$(() => {
     const storyData = useProgramStory().value;
     const story = useStoryblok(storyData);
     const userData = useUserProgram().value;
+    const userEmail = userData.user.email || '';
 
     return (
         <div class="min-h-screen bg-gray-50 pb-20">
@@ -134,9 +135,9 @@ export default component$(() => {
                 <div class="container mx-auto px-4 py-3 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <div class="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-700 font-bold text-sm">
-                            {userData.user.email.charAt(0).toUpperCase()}
+                            {userEmail.charAt(0).toUpperCase()}
                         </div>
-                        <span class="text-sm font-medium text-gray-700 hidden md:inline">{userData.user.email}</span>
+                        <span class="text-sm font-medium text-gray-700 hidden md:inline">{userEmail}</span>
                     </div>
 
                     <div>
