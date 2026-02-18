@@ -28,7 +28,9 @@ export default component$<Props>((props) => {
                 subheading={props.blok.subheading}
                 backgroundImage={props.blok.image?.filename}
                 buttonText={props.blok.link_text}
-                buttonLink={props.blok.link_url?.url || props.blok.link_url?.cached_url || props.blok.link_url as any as string}
+                buttonLink={props.blok.link_url?.url || props.blok.link_url?.cached_url || props.blok.link_url as any as string || "/program/reto-1-transformacion"}
+                secondaryButtonText="Ver todos los programas"
+                secondaryButtonLink="#programas"
             />
         </div>
     );

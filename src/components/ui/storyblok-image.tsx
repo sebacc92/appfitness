@@ -10,6 +10,8 @@ interface StoryblokImageProps {
     // sizes is handled by Unpic default or can be passed if needed to override.
     // Unpic handles 'srcset' generation automatically.
     priority?: boolean;
+    layout?: "constrained" | "fullWidth" | "fixed";
+    style?: any;
 }
 
 export const StoryblokImage = component$<StoryblokImageProps>((props) => {
@@ -17,7 +19,7 @@ export const StoryblokImage = component$<StoryblokImageProps>((props) => {
     // It also handles layout, which we can set to 'constrained' to respect aspect ratio with valid width/height.
 
     // Mapping props to Unpic Image props
-    const { src, alt, class: className, width, height, priority = false } = props;
+    const { src, alt, class: className, width, height, priority = false, layout = "constrained", style } = props;
 
     return (
         <Image
@@ -26,8 +28,9 @@ export const StoryblokImage = component$<StoryblokImageProps>((props) => {
             width={width}
             height={height}
             class={className}
+            style={style}
             priority={priority} // Unpic prop for priority loading (eager + fetchPriority high)
-            layout="constrained" // Resizes to fit container, maintaining aspect ratio. 
+            layout={layout} // Resizes to fit container, maintaining aspect ratio. 
             // If width/height are unknown, 'layout="fullWidth"' or 'layout="fill"' might be better, 
             // but we are enforcing width/height in our usage.
             cdn="storyblok" // Explicitly tell Unpic it's Storyblok (optional usually, but safer)

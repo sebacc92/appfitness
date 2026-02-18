@@ -10,11 +10,13 @@ export interface HeroProps {
   backgroundImage?: string;
   buttonText?: string;
   buttonLink?: string;
+  secondaryButtonText?: string;
+  secondaryButtonLink?: string;
 }
 
 export const Hero = component$((props: HeroProps) => {
   const heroLink = props.buttonLink || "/program/reto-1-transformacion";
-  const { heading, subheading, backgroundImage, buttonText } = props;
+  const { heading, subheading, backgroundImage, buttonText, secondaryButtonText, secondaryButtonLink } = props;
 
   return (
     <section class="relative min-h-screen flex items-center justify-center px-6 pt-20">
@@ -55,14 +57,30 @@ export const Hero = component$((props: HeroProps) => {
           )}
 
           {buttonText && (
-            <Link
-              href={heroLink}
-              class="inline-block"
-            >
-              <Button class="bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)] border-none">
-                {buttonText}
-              </Button>
-            </Link>
+            <div class="flex flex-col gap-4 items-center">
+              <Link
+                href={heroLink}
+                class="inline-block"
+              >
+                <Button class="bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-110 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)] border-none">
+                  {buttonText}
+                </Button>
+              </Link>
+
+              {secondaryButtonText && (
+                <Link
+                  href={secondaryButtonLink || "#programas"}
+                  class="inline-block"
+                >
+                  <Button
+                    look="ghost"
+                    class="text-white border-2 border-white/20 hover:bg-white/10 hover:border-white/40 text-lg font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all duration-300 backdrop-blur-sm"
+                  >
+                    {secondaryButtonText}
+                  </Button>
+                </Link>
+              )}
+            </div>
           )}
         </div>
       </div>

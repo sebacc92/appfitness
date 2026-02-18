@@ -41,7 +41,9 @@ export default component$(() => {
                             alt={content.cover_image.alt || content.title}
                             width={1920}
                             height={1080}
-                            class="absolute inset-0 h-full w-full object-cover object-top opacity-60 transition-transform duration-700 group-hover:scale-105"
+                            layout="fullWidth"
+                            class="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
+                            style={{ objectPosition: 'center 20%' }}
                             priority={true}
                         />
                         <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
@@ -50,7 +52,7 @@ export default component$(() => {
                     <div class="absolute inset-0 bg-gradient-to-br from-cyan-900 to-blue-900 opacity-90" />
                 )}
 
-                <div class="relative h-full container mx-auto px-4 flex flex-col justify-center pb-12 md:pb-20 pt-28 md:pt-32">
+                <div class="relative h-full container mx-auto px-4 flex flex-col justify-center pb-20 md:pb-32 pt-32 md:pt-48">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
                         {/* Left Column: Badge & Title */}
                         <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -65,7 +67,7 @@ export default component$(() => {
                         {/* Right Column: Description & Button */}
                         <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
                             {content.description && (
-                                <div class="prose prose-lg prose-invert text-gray-200 drop-shadow-md mb-10 [&>*]:text-center lg:[&>*]:text-left">
+                                <div class="prose prose-xl prose-invert text-gray-200 drop-shadow-md mb-10 [&>*]:text-center lg:[&>*]:text-left leading-relaxed">
                                     <div dangerouslySetInnerHTML={typeof content.description === 'string'
                                         ? content.description
                                         : renderRichText(content.description)} />
