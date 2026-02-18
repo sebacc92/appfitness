@@ -1,5 +1,5 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { routeLoader$, useLocation } from "@builder.io/qwik-city";
 import { storyblokApi } from "./plugin@storyblok";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
@@ -24,9 +24,11 @@ export const usePrograms = routeLoader$(async () => {
 });
 
 export default component$(() => {
+    const loc = useLocation();
+
     return (
         <div class="flex min-h-screen flex-col">
-            <Header />
+            {!loc.url.pathname.startsWith('/app') && <Header />}
             <main class="flex-1">
                 <Slot />
             </main>
