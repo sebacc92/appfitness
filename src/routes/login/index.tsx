@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import { Form, routeAction$, z, zod$, Link } from "@builder.io/qwik-city";
 import bcrypt from "bcryptjs";
 import { tursoClient } from "~/utils/turso";
+import { setSession } from "~/utils/auth";
 
 export const useLogin = routeAction$(
     async (values, requestEvent) => {
@@ -35,36 +36,11 @@ export const useLogin = routeAction$(
             });
         }
 
-        // Crear cookie de sesión
-        requestEvent.cookie.set("auth_session", "true", {
-            httpOnly: true,
-            secure: true,
-            path: "/",
-            maxAge: 60 * 60 * 24 * 7, // 1 semana
-            sameSite: "lax",
-        });
+        // Set session cookies using helper
+        setSession(requestEvent.cookie, user.id as string);
 
-        // También guardamos el ID del usuario en otra cookie si es necesario para el loader,
-        // pero el ejemplo del usuario solo usaba "auth_session"=true.
-        // Para que funcione mi loader `useProgramAccess` que busca `session.user.id`,
-        // necesitaría adaptar la lógica de sesión.
-        // El usuario pidió "Adapta las consultas SQL...".
-        // PERO el requerimiento original de Auth.js usaba `useSession`.
-        // La estrategia de "Custom Auth" reemplaza o complementa.
-        // Voy a setear una cookie `user_id` también para poder leerla manualmente si fuera necesario,
-        // o asumir que el usuario refactorizará los loaders para leer estas cookies.
-        // Por ahora, sigo el ejemplo del usuario que pedía cookie segura.
-
-        // AGREGO: cookie user_id para futura referencia
-        requestEvent.cookie.set("user_id", user.id as string, {
-            httpOnly: true,
-            secure: true,
-            path: "/",
-            maxAge: 60 * 60 * 24 * 7,
-            sameSite: "lax",
-        });
-
-        throw requestEvent.redirect(302, "/");
+        const redirectUrl = requestEvent.url.searchParams.get('redirect') || '/app/program/fuerza';
+        throw requestEvent.redirect(302, redirectUrl);
     },
     zod$({
         email: z.string().email("Email inválido"),
