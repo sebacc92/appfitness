@@ -64,7 +64,7 @@ export const useLogin = routeAction$(
             sameSite: "lax",
         });
 
-        throw requestEvent.redirect(302, "/app/program/fuerza");
+        throw requestEvent.redirect(302, "/");
     },
     zod$({
         email: z.string().email("Email inválido"),

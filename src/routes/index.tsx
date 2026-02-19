@@ -29,7 +29,7 @@ export default component$(() => {
 
 export const head: DocumentHead = () => {
   // Ideally this should also come from Storyblok, but keeping static for now or can use `story.value.content` content if SEO fields exist
-  const baseUrl = "https://coach-fabian-avendano.netlify.app";
+  const baseUrl = "https://fa.cleverisma.com";
   const currentUrl = `${baseUrl}/`;
   const imageUrl = `${baseUrl}/assets/images/fabian-kettlebell.jpg`;
 

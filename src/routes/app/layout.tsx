@@ -1,24 +1,8 @@
 import { component$, Slot } from "@builder.io/qwik";
-import { routeLoader$, Link } from "@builder.io/qwik-city";
+import { Link } from "@builder.io/qwik-city";
 import { Button } from "~/components/ui/button/button";
 
-export const useAuthGuard = routeLoader$(({ cookie, redirect }) => {
-    const authToken = cookie.get('auth_token');
-    if (!authToken) {
-        throw redirect(302, '/login');
-    }
-    return {
-        isAuthenticated: true,
-        user: {
-            name: "Estudiante Demo",
-            trialStart: cookie.get('trial_start')?.value
-        }
-    };
-});
-
 export default component$(() => {
-    useAuthGuard();
-
     return (
         <div class="flex min-h-screen flex-col bg-gray-50">
             <header class="bg-white shadow">
