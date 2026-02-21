@@ -47,10 +47,10 @@ export default component$(() => {
                             priority={true}
                         />
                         {/* Gradient Overlay for text readability */}
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/90 to-black/50 z-10 pointer-events-none" />
+                        <div class="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/90 to-black/50 z-10 pointer-events-none" />
                     </>
                 ) : (
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-900 to-blue-900 z-0" />
+                    <div class="absolute inset-0 bg-linear-to-br from-cyan-900 to-blue-900 z-0" />
                 )}
 
                 <div class="relative z-20 h-full container mx-auto px-4 flex flex-col justify-center pb-20 md:pb-32 pt-32 md:pt-48 min-h-[60vh] md:min-h-[85vh]">

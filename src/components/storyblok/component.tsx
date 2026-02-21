@@ -6,7 +6,6 @@ import Hero from "./hero";
 import Methodology from "./methodology";
 import Testimonials from "./testimonials-section";
 import About from "./about-section";
-import FAQ from "./faq-section";
 import Program from "./training/program";
 import Workout from "./training/workout";
 import WorkoutSection from "./training/workout-section";
@@ -26,7 +25,6 @@ const Components: any = {
     'methodology': Methodology,
     'testimonials_section': Testimonials,
     'about_section': About,
-    'faq': FAQ,
     'Program': Program,
     'Workout': Workout,
     'WorkoutSection': WorkoutSection,

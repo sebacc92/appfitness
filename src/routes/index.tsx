@@ -4,6 +4,8 @@ import { storyblokApi, useStoryblok } from "~/routes/plugin@storyblok";
 import StoryblokComponent from "~/components/storyblok/component";
 import type { ISbStoryData } from "@storyblok/js";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import FaqSection from "~/components/faq-section";
+import VideosCoverSection from "~/components/videos-cover-section";
 
 export const useStory = routeLoader$(async ({ error }) => {
   if (!storyblokApi) {
@@ -24,7 +26,11 @@ export default component$(() => {
   const storyData = useStory().value;
   const story = useStoryblok(storyData);
 
-  return <StoryblokComponent blok={story.value.content} />;
+  return <>
+    <StoryblokComponent blok={story.value.content} />
+    <FaqSection />
+    <VideosCoverSection />
+  </>;
 });
 
 export const head: DocumentHead = () => {
