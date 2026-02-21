@@ -151,8 +151,16 @@ export default component$(() => {
                     )}
 
                     {action.value?.failed && (
-                        <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700 border border-red-200">
-                            {action.value.message}
+                        <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700 border border-red-200 flex flex-col gap-2">
+                            <span>{action.value.message}</span>
+                            {action.value.message === "El usuario ya existe" && (
+                                <Link
+                                    href={`/login?${location.url.searchParams.toString()}`}
+                                    class="font-bold underline hover:text-red-800"
+                                >
+                                    Haz clic aquí para iniciar sesión y acceder al programa
+                                </Link>
+                            )}
                         </div>
                     )}
 

@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import { Form, routeAction$, z, zod$, Link } from "@builder.io/qwik-city";
+import { Form, routeAction$, z, zod$, Link, useLocation } from "@builder.io/qwik-city";
 import bcrypt from "bcryptjs";
 import { tursoClient } from "~/utils/turso";
 import { setSession } from "~/utils/auth";
@@ -39,17 +39,48 @@ export const useLogin = routeAction$(
         // Set session cookies using helper
         setSession(requestEvent.cookie, user.id as string);
 
-        const redirectUrl = requestEvent.url.searchParams.get('redirect') || '/app/program/fuerza';
+        const userId = user.id as string;
+        const programSlug = values.programSlug;
+        if (programSlug) {
+            try {
+                const checkEnrollment = await client.execute({
+                    sql: "SELECT id FROM enrollments WHERE userId = ? AND programSlug = ?",
+                    args: [userId, programSlug],
+                });
+                if (checkEnrollment.rows.length === 0) {
+                    await client.execute({
+                        sql: "INSERT INTO enrollments (userId, programSlug, status, startDate) VALUES (?, ?, ?, ?)",
+                        args: [userId, programSlug, 'trial', Date.now()],
+                    });
+                }
+            } catch (e) {
+                console.error("Error al inscribir al usuario existente:", e);
+            }
+        }
+
+        const redirectUrl = values.programSlug ? `/app/program/${values.programSlug}` : (requestEvent.url.searchParams.get('redirect') || '/app/program/fuerza');
         throw requestEvent.redirect(302, redirectUrl);
     },
     zod$({
         email: z.string().email("Email inválido"),
         password: z.string().min(1, "Ingrese contraseña"),
+        programSlug: z.string().optional(),
     })
 );
 
 export default component$(() => {
     const action = useLogin();
+    const location = useLocation();
+
+    const redirectParam = location.url.searchParams.get('redirect');
+    let computedSlug = location.url.searchParams.get('program');
+
+    if (!computedSlug && redirectParam && redirectParam.includes('/app/program/')) {
+        const parts = redirectParam.split('/app/program/');
+        if (parts.length > 1) {
+            computedSlug = parts[1].split('/')[0];
+        }
+    }
 
     return (
         <div class="flex min-h-screen items-center justify-center bg-gray-50 p-4">
@@ -64,6 +95,8 @@ export default component$(() => {
                 </div>
 
                 <Form action={action} class="space-y-6">
+                    {computedSlug && <input type="hidden" name="programSlug" value={computedSlug} />}
+
                     {action.value?.failed && (
                         <div class="rounded-lg bg-red-50 p-4 text-sm text-red-700 border border-red-200">
                             {action.value.message}

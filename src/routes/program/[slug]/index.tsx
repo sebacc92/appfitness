@@ -72,7 +72,7 @@ export default component$(() => {
                         {/* Right Column: CTA */}
                         <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
                             <Link
-                                href={`/login?action=register&redirect=/app/program/${story.slug}`}
+                                href={`/create?action=register&redirect=/app/program/${story.slug}`}
                                 class="inline-block bg-[#00C2FF] hover:bg-[#33d1ff] text-black text-xl font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-[0_0_30px_rgba(0,194,255,0.5)] hover:shadow-[0_0_50px_rgba(0,194,255,0.8)]"
                             >
                                 EMPEZAR AHORA
