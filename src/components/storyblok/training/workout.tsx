@@ -10,6 +10,10 @@ export interface WorkoutBlok extends SbBlokData {
     video?: { filename: string } | string;
     video_url?: string;
     exercises?: SbBlokData[];
+    objective?: string;
+    estimated_duration?: string;
+    level?: string;
+    sections?: SbBlokData[];
 }
 
 interface Props {
@@ -87,13 +91,35 @@ export default component$<Props>((props) => {
                         </div>
                     )}
 
-                    {/* Lista de Ejercicios */}
-                    <div class="space-y-4">
-                        {props.blok.exercises?.map((exercise) => (
-                            <StoryblokComponent key={exercise._uid} blok={exercise} />
-                        ))}
-                        {(!props.blok.exercises || props.blok.exercises.length === 0) && (
-                            <p class="text-center text-gray-500 italic py-4">No hay ejercicios asignados.</p>
+                    {/* Metadata del Día */}
+                    {(props.blok.objective || props.blok.estimated_duration || props.blok.level) && (
+                        <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-3 bg-gray-800/80 p-4 rounded-lg border border-gray-700 text-sm">
+                            {props.blok.level && (
+                                <div><span class="text-gray-500 block text-xs uppercase">Nivel</span><span class="text-white font-medium">{props.blok.level}</span></div>
+                            )}
+                            {props.blok.estimated_duration && (
+                                <div><span class="text-gray-500 block text-xs uppercase">Duración</span><span class="text-white font-medium">{props.blok.estimated_duration}</span></div>
+                            )}
+                            {props.blok.objective && (
+                                <div class="md:col-span-3 mt-2 md:mt-0"><span class="text-gray-500 block text-xs uppercase">Objetivo</span><span class="text-gray-300 italic">{props.blok.objective}</span></div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Renderizado de Secciones o Ejercicios (Compatibilidad) */}
+                    <div class="space-y-2">
+                        {props.blok.sections && props.blok.sections.length > 0 ? (
+                            // Nueva estructura: Renderiza las secciones
+                            props.blok.sections.map((section) => (
+                                <StoryblokComponent key={section._uid} blok={section} />
+                            ))
+                        ) : props.blok.exercises && props.blok.exercises.length > 0 ? (
+                            // Vieja estructura: Renderiza los ejercicios directos
+                            props.blok.exercises.map((exercise) => (
+                                <StoryblokComponent key={exercise._uid} blok={exercise} />
+                            ))
+                        ) : (
+                            <p class="text-center text-gray-500 italic py-4">No hay contenido asignado para este día.</p>
                         )}
                     </div>
                 </div>

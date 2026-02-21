@@ -9,6 +9,7 @@ import About from "./about-section";
 import FAQ from "./faq-section";
 import Program from "./training/program";
 import Workout from "./training/workout";
+import WorkoutSection from "./training/workout-section";
 import Exercise from "./training/exercise";
 import ExerciseAlternatives from "./training/exercise-alternatives";
 import TestimonialItem from "./testimonial-item";
@@ -28,6 +29,7 @@ const Components: any = {
     'faq': FAQ,
     'Program': Program,
     'Workout': Workout,
+    'WorkoutSection': WorkoutSection,
     'Exercise': Exercise,
     'exercise_alternatives': ExerciseAlternatives,
     'testimonial_item': TestimonialItem,

@@ -9,6 +9,7 @@ export interface ExerciseBlok extends SbBlokData {
     sets?: string;
     reps?: string;
     rest?: string;
+    alternatives?: string;
 }
 
 interface Props {
@@ -48,9 +49,14 @@ export default component$<Props>((props) => {
         <div {...storyblokEditable(props.blok)} class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
 
             <div class="p-4">
-                <h4 class="font-bold text-white text-lg mb-3 flex items-center gap-2">
+                <h4 class="font-bold text-white text-lg mb-3 flex items-center gap-2 flex-wrap">
                     <span class="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
                     {props.blok.name}
+                    {props.blok.alternatives && (
+                        <span class="text-sm font-normal text-gray-400 ml-1 bg-gray-700 px-2 py-0.5 rounded-full">
+                            {props.blok.alternatives}
+                        </span>
+                    )}
                 </h4>
 
                 {/* Video Section - Compacto */}
