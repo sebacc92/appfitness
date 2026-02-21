@@ -32,7 +32,7 @@ export default component$(() => {
                             <VideosImg
                                 alt="Videos de entrenamiento"
                                 class="absolute inset-0 w-full h-full object-cover"
-                                style={{ objectPosition: 'center 20%' }}
+                                style={{ objectPosition: 'center 50%' }}
                             />
                             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                 <div class="text-center text-white">

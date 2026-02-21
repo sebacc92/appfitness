@@ -28,8 +28,8 @@ export default component$(() => {
 
   return <>
     <StoryblokComponent blok={story.value.content} />
-    <FaqSection />
     <VideosCoverSection />
+    <FaqSection />
   </>;
 });
 
