@@ -4,18 +4,18 @@ import { Button } from "~/components/ui/button/button";
 
 export default component$(() => {
   const youtubeVideos = [
-    { id: "dQw4w9WgXcQ", title: "Caminata de oso", description: "Ejercicio de locomoción que desarrolla fuerza, estabilidad y coordinación en todo el cuerpo" },
-    { id: "dQw4w9WgXcQ", title: "Remo invertido con banda", description: "Ejercicio de tracción horizontal para desarrollar la espalda y mejorar la fuerza de agarre" },
-    { id: "dQw4w9WgXcQ", title: "Buenos días con barra", description: "Ejercicio fundamental para fortalecer la cadena posterior, especialmente isquiotibiales y glúteos" },
-    { id: "dQw4w9WgXcQ", title: "Hip Thrust", description: "Ejercicio específico para desarrollar glúteos y mejorar la extensión de cadera" },
-    { id: "dQw4w9WgXcQ", title: "Caminata de granjero", description: "Ejercicio de carga que mejora la fuerza de agarre, estabilidad del core y resistencia funcional" },
-    { id: "dQw4w9WgXcQ", title: "Remo Pendlay", description: "Ejercicio fundamental para desarrollar la espalda y mejorar la fuerza de tracción" },
-    { id: "dQw4w9WgXcQ", title: "Halo con disco", description: "Ejercicio de movilidad y estabilidad para hombros y core con disco de peso" },
-    { id: "dQw4w9WgXcQ", title: "Monster walk", description: "Ejercicio de movilidad y activación para glúteos y caderas con banda elástica" },
-    { id: "dQw4w9WgXcQ", title: "Face-pull-polea", description: "Ejercicio de tracción vertical para fortalecer la espalda alta y mejorar la postura" },
-    { id: "dQw4w9WgXcQ", title: "Sentadilla con barra al box", description: "Ejercicio fundamental para desarrollar fuerza en piernas y mejorar la técnica de sentadilla" },
-    { id: "dQw4w9WgXcQ", title: "Peso muerto trap", description: "Ejercicio de fuerza que desarrolla la espalda baja, caderas y fortalece la cadena posterior" },
-    { id: "dQw4w9WgXcQ", title: "Sentadilla bulgara", description: "Video de entrenamiento gratuito para tu rutina diaria" }
+    { id: "PX8sW951p-o", title: "Caminata de oso", description: "Ejercicio de locomoción que desarrolla fuerza, estabilidad y coordinación en todo el cuerpo" },
+    { id: "5S0NWNGwT0Q", title: "Remo invertido con banda", description: "Ejercicio de tracción horizontal para desarrollar la espalda y mejorar la fuerza de agarre" },
+    { id: "TtjobscaCvo", title: "Buenos días con barra", description: "Ejercicio fundamental para fortalecer la cadena posterior, especialmente isquiotibiales y glúteos" },
+    { id: "XVGPj7wLDKo", title: "Hip Thrust", description: "Ejercicio específico para desarrollar glúteos y mejorar la extensión de cadera" },
+    { id: "UHazlSjYpCw", title: "Caminata de granjero", description: "Ejercicio de carga que mejora la fuerza de agarre, estabilidad del core y resistencia funcional" },
+    { id: "k6NT_sgNMzw", title: "Remo Pendlay", description: "Ejercicio fundamental para desarrollar la espalda y mejorar la fuerza de tracción" },
+    { id: "JGtkIPXD3Tw", title: "Halo con disco", description: "Ejercicio de movilidad y estabilidad para hombros y core con disco de peso" },
+    { id: "ARGOOAAMjpc", title: "Monster walk", description: "Ejercicio de movilidad y activación para glúteos y caderas con banda elástica" },
+    { id: "ubF_Vx_05x0", title: "Face-pull-polea", description: "Ejercicio de tracción vertical para fortalecer la espalda alta y mejorar la postura" },
+    { id: "LocsNgE3KEM", title: "Sentadilla con barra al box", description: "Ejercicio fundamental para desarrollar fuerza en piernas y mejorar la técnica de sentadilla" },
+    { id: "QNDanyB1u9w", title: "Peso muerto trap", description: "Ejercicio de fuerza que desarrolla la espalda baja, caderas y fortalece la cadena posterior" },
+    { id: "uQLuPx5u5Q8", title: "Sentadilla bulgara", description: "Video de entrenamiento gratuito para tu rutina diaria" }
   ];
 
   return (
@@ -98,9 +98,6 @@ export default component$(() => {
             ))}
           </div>
 
-          <div class="mt-16 text-center">
-            <p class="text-gray-500 italic mb-6">Nota para el administrador: Reemplaza los IDs de YouTube (`dQw4w9WgXcQ`) dentro de arreglo `youtubeVideos` en el código con los verdaderos IDs de tus videos.</p>
-          </div>
         </div>
       </section>
 
