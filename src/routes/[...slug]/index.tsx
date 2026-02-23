@@ -16,8 +16,14 @@ export const useStory = routeLoader$(async ({ params, error }) => {
             version: "draft",
         });
         return data.story as ISbStoryData;
-    } catch (e) {
-        console.error(e);
+    } catch (e: any) {
+        // En lugar de imprimir todo el error de Storyblok que es gigante,
+        // solo avisamos que la página no se encontró.
+        if (e?.status === 404) {
+            console.warn(`[Storyblok] Página no encontrada para el slug: "${slug}"`);
+        } else {
+            console.error(`[Storyblok] Error al buscar el slug "${slug}":`, e?.message || e);
+        }
         throw error(404, "Page not found");
     }
 });

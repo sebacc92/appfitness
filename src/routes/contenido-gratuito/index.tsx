@@ -183,8 +183,8 @@ export default component$(() => {
 
 export const head: DocumentHead = ({ params }) => {
   const locale = params.locale || 'es';
-  const baseUrl = "https://coach-fabian-avendano.netlify.app";
-  const currentUrl = `${baseUrl}/${locale}/contenido-gratuito`;
+  const baseUrl = "https://fa.cleverisma.com";
+  const currentUrl = `${baseUrl}/contenido-gratuito`;
   const imageUrl = `${baseUrl}/assets/images/2.jpeg`;
 
   let title, description, keywords;
